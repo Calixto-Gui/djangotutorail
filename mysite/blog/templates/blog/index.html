@@ -1,0 +1,56 @@
+{% load static %}
+
+{% comment %} <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+
+{% if post_list %}
+    <ul>
+    {% for post in post_list %}
+    <li><a href="{% url 'blog:detail' post.id %}">{{ post.post_title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No posts are available.</p>
+{% endif %} {% endcomment %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Blog</title>
+    <link rel="stylesheet"  href="{% static 'blog/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>My Blog</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'blog:index' %}">Home</a></li>
+                <li><a href="{% url 'blog:index' %}">About</a></li>
+                <li><a href="{% url 'blog:index' %}">Contact</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+
+
+            {% if post_list %}
+                <ul>
+                {% for post in post_list %}
+                <li><a href="{% url 'blog:detail' post.id %}">{{ post.post_title }}</a></li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No posts are available.</p>
+            {% endif %}
+
+
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2023 My Blog. All rights reserved.</p>
+    </footer>
+</body>
+</html>

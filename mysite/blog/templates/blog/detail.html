@@ -1,0 +1,17 @@
+
+{% extends 'blog/index.html' %}
+
+{% block content %}
+    <h2>{{post.post_title}}</h2>
+    <p>{{post.post_text}}</p>
+    {% if post.photo %}
+        <img src="{{ post.photo.url }}" alt="Post Photo">
+    {% else %}
+        <p>No image available</p>
+    {% endif %}
+
+    {% for comment in post.comment_set.all %}
+    <li>{{ comment.comment_text }}</li>
+    {% endfor %}
+    
+{% endblock %}
