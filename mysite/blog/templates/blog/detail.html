@@ -2,16 +2,24 @@
 {% extends 'blog/index.html' %}
 
 {% block content %}
+    <h2>{{post.pub_date|date}}</h2>
     <h2>{{post.post_title}}</h2>
     <p>{{post.post_text}}</p>
+    
+    <figure>
     {% if post.photo %}
         <img src="{{ post.photo.url }}" alt="Post Photo">
     {% else %}
         <p>No image available</p>
     {% endif %}
+    </figure>
 
     {% for comment in post.comment_set.all %}
     <li>{{ comment.comment_text }}</li>
     {% endfor %}
+
+
+    <a href="{% url 'blog:add_comment' post.id %}">Add Comment</a>
+    <a href="{% url 'blog:index' %}">Back to Home</a>
     
 {% endblock %}

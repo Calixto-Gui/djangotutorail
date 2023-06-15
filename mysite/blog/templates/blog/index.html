@@ -38,15 +38,19 @@
             {% if post_list %}
                 <ul>
                 {% for post in post_list %}
-                <li><a href="{% url 'blog:detail' post.id %}">{{ post.post_title }}</a></li>
+                <li><a href="{% url 'blog:detail' post.id %}">{{ post.pub_date|date }} - {{ post.post_title }}</a></li>
                 {% endfor %}
                 </ul>
             {% else %}
-                <p>No posts are available.</p>
+                <p>No posts are available!!.</p>
             {% endif %}
+            <br>    
+            <a href="{% url 'blog:create.post' %}" class="new-post-button">Create New Post</a>
+
 
 
         {% endblock %}
+        
     </main>
 
     <footer>
