@@ -11,6 +11,13 @@ class IndexView(generic.ListView):
     model = Post
     template_name = "blog/index.html"
     
+    def get_queryset(self):
+        """
+        Return the last five published questions (not including those set to be
+        published in the future).
+        """
+        return Post.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")
+    
 class DetailView(generic.DetailView):
     model = Post
     template_name = "blog/detail.html"
